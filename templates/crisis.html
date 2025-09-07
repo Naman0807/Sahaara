@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% block title %}Emergency Support{% endblock %} {%
+block content %}
+<div class="row justify-content-center">
+	<div class="col-md-8">
+		<h2 class="mb-4 text-danger">Emergency Support Resources</h2>
+		<p class="lead">
+			If you're in crisis, please reach out to these helplines immediately. Help
+			is available 24/7.
+		</p>
+
+		<div class="alert alert-warning">
+			<strong>Important:</strong> If you or someone you know is in immediate
+			danger, call emergency services (112 in India).
+		</div>
+
+		<div class="row">
+			{% for key, value in helplines.items() %}
+			<div class="col-md-6 mb-4">
+				<div class="card h-100">
+					<div class="card-body">
+						<h5 class="card-title">{{ key|title }}</h5>
+						<p class="card-text">{{ value }}</p>
+						<a href="tel:{{ value }}" class="btn btn-danger">Call Now</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+
+		<div class="mt-5">
+			<h4>Additional Resources</h4>
+			<ul class="list-group">
+				<li class="list-group-item">
+					Visit your nearest mental health professional
+				</li>
+				<li class="list-group-item">
+					Talk to a trusted friend or family member
+				</li>
+				<li class="list-group-item">Use our AI chat for immediate support</li>
+			</ul>
+		</div>
+	</div>
+</div>
+{% endblock %}

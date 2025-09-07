@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}AI Chat Companion{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2 class="mb-4">Chat with Your Wellness Companion</h2>
+
+        <div class="mb-3">
+            <label for="languageSelect" class="form-label">Select Language:</label>
+            <select class="form-select" id="languageSelect">
+                <option value="auto" {% if language == 'auto' %}selected{% endif %}>Auto-Detect (Recommended)</option>
+                <option value="en" {% if language == 'en' %}selected{% endif %}>English</option>
+                <option value="hi" {% if language == 'hi' %}selected{% endif %}>Hindi</option>
+                <option value="hinglish" {% if language == 'hinglish' %}selected{% endif %}>Hinglish (Hindi + English)</option>
+                <option value="bn" {% if language == 'bn' %}selected{% endif %}>Bengali</option>
+                <option value="ta" {% if language == 'ta' %}selected{% endif %}>Tamil</option>
+                <option value="te" {% if language == 'te' %}selected{% endif %}>Telugu</option>
+                <option value="mr" {% if language == 'mr' %}selected{% endif %}>Marathi</option>
+            </select>
+            <small class="form-text text-muted">
+                Auto-detect will automatically identify your language and respond accordingly.
+                Hinglish is perfect for mixing Hindi and English words commonly used in India.
+            </small>
+        </div>
+
+        <div id="chatMessages" class="border rounded p-3 mb-3" style="height: 400px; overflow-y: auto;">
+            <!-- Messages will be appended here -->
+        </div>
+
+        <div class="input-group">
+            <textarea class="form-control" id="messageInput" rows="3" placeholder="Type your message here..."></textarea>
+            <button class="btn btn-primary" id="sendButton">Send</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endblock %}

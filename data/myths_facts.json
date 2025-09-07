@@ -1,0 +1,156 @@
+{
+	"mental_health_myths": [
+		{
+			"myth": "Mental illness is rare",
+			"fact": "Mental health conditions are very common. 1 in 4 people will experience mental health issues at some point in their lives. It's more common than you think.",
+			"category": "prevalence",
+			"language": "en"
+		},
+		{
+			"myth": "Mental illness is a sign of weakness",
+			"fact": "Mental health conditions are medical conditions, not character flaws. They can affect anyone, regardless of strength, intelligence, or willpower.",
+			"category": "stigma",
+			"language": "en"
+		},
+		{
+			"myth": "People with mental illness are dangerous",
+			"fact": "People with mental health conditions are far more likely to be victims of violence than perpetrators. Most people with mental illness are not violent.",
+			"category": "stigma",
+			"language": "en"
+		},
+		{
+			"myth": "Mental health problems can be overcome by willpower alone",
+			"fact": "While positive thinking helps, mental health conditions often require professional treatment, medication, therapy, or a combination of approaches.",
+			"category": "treatment",
+			"language": "en"
+		},
+		{
+			"myth": "Therapy is only for 'crazy' people",
+			"fact": "Therapy is for anyone who wants to improve their mental health, cope with stress, or work through life's challenges. It's a normal and healthy choice.",
+			"category": "treatment",
+			"language": "en"
+		},
+		{
+			"myth": "Antidepressants change your personality",
+			"fact": "Antidepressants treat symptoms of depression and anxiety. They don't change your fundamental personality - they help you return to your normal self.",
+			"category": "medication",
+			"language": "en"
+		},
+		{
+			"myth": "Once you start medication, you have to take it forever",
+			"fact": "Many people take medication for a limited time and then taper off under medical supervision. The duration depends on individual needs.",
+			"category": "medication",
+			"language": "en"
+		},
+		{
+			"myth": "Mental illness only affects adults",
+			"fact": "Mental health conditions can affect people of all ages, including children and teenagers. Early intervention is important.",
+			"category": "age",
+			"language": "en"
+		},
+		{
+			"myth": "Talking about mental health makes it worse",
+			"fact": "Talking about mental health reduces stigma and helps people get the support they need. It often makes things better, not worse.",
+			"category": "communication",
+			"language": "en"
+		},
+		{
+			"myth": "Mental health days are just excuses to be lazy",
+			"fact": "Mental health days are legitimate and necessary for maintaining overall well-being, just like physical health days for illness.",
+			"category": "workplace",
+			"language": "en"
+		}
+	],
+	"depression_myths": [
+		{
+			"myth": "Depression is just feeling sad",
+			"fact": "Depression is a serious medical condition that affects mood, thoughts, physical health, and behavior. It's more than just temporary sadness.",
+			"category": "understanding",
+			"language": "en"
+		},
+		{
+			"myth": "Depression means you're ungrateful",
+			"fact": "Depression is a chemical imbalance in the brain, not a reflection of your character or gratitude level.",
+			"category": "stigma",
+			"language": "en"
+		},
+		{
+			"myth": "Exercise alone can cure depression",
+			"fact": "Exercise is helpful and can improve mood, but severe depression usually requires professional treatment in addition to lifestyle changes.",
+			"category": "treatment",
+			"language": "en"
+		},
+		{
+			"myth": "If you're depressed, you should just 'snap out of it'",
+			"fact": "Depression can't be overcome by willpower alone. It requires understanding, support, and often professional treatment.",
+			"category": "support",
+			"language": "en"
+		}
+	],
+	"anxiety_myths": [
+		{
+			"myth": "Anxiety is just worrying too much",
+			"fact": "Anxiety disorders involve intense, persistent worry that interferes with daily life and can include physical symptoms like rapid heartbeat and sweating.",
+			"category": "understanding",
+			"language": "en"
+		},
+		{
+			"myth": "Anxiety medication makes you addicted",
+			"fact": "Most anxiety medications are not addictive when taken as prescribed. Some anti-anxiety medications can be habit-forming if misused.",
+			"category": "medication",
+			"language": "en"
+		},
+		{
+			"myth": "Avoiding anxiety triggers is the best solution",
+			"fact": "While some avoidance is necessary, learning to face fears gradually (exposure therapy) is often the most effective long-term solution.",
+			"category": "treatment",
+			"language": "en"
+		}
+	],
+	"student_myths": [
+		{
+			"myth": "Mental health issues are normal for students",
+			"fact": "While stress is common, severe mental health issues are not 'normal' and should be addressed professionally.",
+			"category": "student_life",
+			"language": "en"
+		},
+		{
+			"myth": "Taking time off for mental health will ruin your academic record",
+			"fact": "Most universities have policies for medical leave, and prioritizing mental health often leads to better academic performance.",
+			"category": "education",
+			"language": "en"
+		},
+		{
+			"myth": "Only weak students struggle with mental health",
+			"fact": "Mental health challenges affect students at all academic levels and from all backgrounds.",
+			"category": "stigma",
+			"language": "en"
+		}
+	],
+	"hindi_myths": [
+		{
+			"myth": "मानसिक बीमारी कमजोरी का संकेत है",
+			"fact": "मानसिक स्वास्थ्य स्थितियां चिकित्सा स्थितियां हैं, न कि चरित्र की कमियां। ये किसी भी व्यक्ति को प्रभावित कर सकती हैं।",
+			"category": "stigma",
+			"language": "hi"
+		},
+		{
+			"myth": "मानसिक बीमारी वाले लोग खतरनाक होते हैं",
+			"fact": "मानसिक स्वास्थ्य स्थितियों वाले लोग हिंसा के पीड़ित होने की अधिक संभावना रखते हैं, न कि अपराधी। ज्यादातर लोग हिंसक नहीं होते।",
+			"category": "stigma",
+			"language": "hi"
+		},
+		{
+			"myth": "दवा शुरू करने के बाद इसे हमेशा लेना पड़ता है",
+			"fact": "कई लोग सीमित समय के लिए दवा लेते हैं और फिर चिकित्सकीय पर्यवेक्षण में इसे कम करते हैं। अवधि व्यक्तिगत आवश्यकताओं पर निर्भर करती है।",
+			"category": "medication",
+			"language": "hi"
+		},
+		{
+			"myth": "मानसिक स्वास्थ्य के बारे में बात करना इसे बदतर बना देता है",
+			"fact": "मानसिक स्वास्थ्य के बारे में बात करना कलंक को कम करती है और लोगों को आवश्यक सहायता मिलने में मदद करती है।",
+			"category": "communication",
+			"language": "hi"
+		}
+	]
+}

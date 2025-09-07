@@ -1,0 +1,430 @@
+{
+	"exam_stress_sos": {
+		"name": "Exam Stress SOS",
+		"description": "Quick 3-day plan to manage exam anxiety and build confidence",
+		"duration_days": 3,
+		"target_audience": "class_10_12",
+		"days": {
+			"1": {
+				"title": "Day 1: Build Your Foundation",
+				"tasks": [
+					{
+						"id": "breathing_exercise",
+						"title": "4-7-8 Breathing Exercise",
+						"description": "Practice 4-7-8 breathing for 5 minutes to calm your mind",
+						"duration_minutes": 5,
+						"type": "exercise"
+					},
+					{
+						"id": "study_break",
+						"title": "Take a 10-minute break",
+						"description": "Step away from your books, stretch, and have a healthy snack",
+						"duration_minutes": 10,
+						"type": "break"
+					},
+					{
+						"id": "positive_affirmation",
+						"title": "Write 3 positive affirmations",
+						"description": "Write statements like 'I am capable and prepared for my exams'",
+						"duration_minutes": 5,
+						"type": "reflection"
+					}
+				]
+			},
+			"2": {
+				"title": "Day 2: Organize & Prioritize",
+				"tasks": [
+					{
+						"id": "study_plan",
+						"title": "Create a study schedule",
+						"description": "List subjects and allocate time for each topic",
+						"duration_minutes": 15,
+						"type": "planning"
+					},
+					{
+						"id": "mindfulness",
+						"title": "5-minute mindfulness meditation",
+						"description": "Focus on the present moment and let go of exam worries",
+						"duration_minutes": 5,
+						"type": "meditation"
+					},
+					{
+						"id": "talk_to_someone",
+						"title": "Talk to a friend or family member",
+						"description": "Share your feelings about exam stress",
+						"duration_minutes": 10,
+						"type": "social"
+					}
+				]
+			},
+			"3": {
+				"title": "Day 3: Final Preparation & Self-Care",
+				"tasks": [
+					{
+						"id": "review_notes",
+						"title": "Quick review of key concepts",
+						"description": "Spend 20 minutes reviewing important topics",
+						"duration_minutes": 20,
+						"type": "study"
+					},
+					{
+						"id": "relaxation_technique",
+						"title": "Progressive muscle relaxation",
+						"description": "Tense and relax different muscle groups for stress relief",
+						"duration_minutes": 10,
+						"type": "exercise"
+					},
+					{
+						"id": "exam_day_prep",
+						"title": "Prepare for exam day",
+						"description": "Pack your bag, set multiple alarms, plan your route",
+						"duration_minutes": 10,
+						"type": "preparation"
+					}
+				]
+			}
+		}
+	},
+	"sleep_reset": {
+		"name": "Sleep Reset (7 Days)",
+		"description": "7-day program to improve sleep quality and establish healthy sleep habits",
+		"duration_days": 7,
+		"target_audience": "college_youth",
+		"days": {
+			"1": {
+				"title": "Day 1: Establish Bedtime Routine",
+				"tasks": [
+					{
+						"id": "no_screens",
+						"title": "No screens 1 hour before bed",
+						"description": "Put away your phone, laptop, and TV",
+						"duration_minutes": 60,
+						"type": "habit"
+					},
+					{
+						"id": "warm_drink",
+						"title": "Drink warm milk or herbal tea",
+						"description": "Have a relaxing drink before bedtime",
+						"duration_minutes": 5,
+						"type": "routine"
+					},
+					{
+						"id": "read_book",
+						"title": "Read a book for 20 minutes",
+						"description": "Choose something light and enjoyable",
+						"duration_minutes": 20,
+						"type": "relaxation"
+					}
+				]
+			},
+			"2": {
+				"title": "Day 2: Optimize Sleep Environment",
+				"tasks": [
+					{
+						"id": "dark_room",
+						"title": "Make your room completely dark",
+						"description": "Use blackout curtains or eye mask",
+						"duration_minutes": 5,
+						"type": "environment"
+					},
+					{
+						"id": "cool_temperature",
+						"title": "Set room temperature to 18-20°C",
+						"description": "Cooler rooms promote better sleep",
+						"duration_minutes": 2,
+						"type": "environment"
+					},
+					{
+						"id": "comfortable_bed",
+						"title": "Ensure comfortable bedding",
+						"description": "Check pillows, mattress, and sheets",
+						"duration_minutes": 5,
+						"type": "environment"
+					}
+				]
+			},
+			"3": {
+				"title": "Day 3: Consistent Wake-up Time",
+				"tasks": [
+					{
+						"id": "set_alarm",
+						"title": "Set consistent wake-up time",
+						"description": "Wake up at the same time every day, even on weekends",
+						"duration_minutes": 1,
+						"type": "routine"
+					},
+					{
+						"id": "morning_light",
+						"title": "Get morning sunlight exposure",
+						"description": "Step outside or open curtains for 10-15 minutes",
+						"duration_minutes": 15,
+						"type": "habit"
+					},
+					{
+						"id": "light_exercise",
+						"title": "Light morning exercise",
+						"description": "Go for a short walk or do stretching",
+						"duration_minutes": 20,
+						"type": "exercise"
+					}
+				]
+			},
+			"4": {
+				"title": "Day 4: Limit Caffeine & Heavy Meals",
+				"tasks": [
+					{
+						"id": "no_caffeine_after_2",
+						"title": "No caffeine after 2 PM",
+						"description": "Avoid coffee, tea, energy drinks in the afternoon",
+						"duration_minutes": 0,
+						"type": "diet"
+					},
+					{
+						"id": "light_dinner",
+						"title": "Eat light dinner 2-3 hours before bed",
+						"description": "Avoid heavy, spicy, or fatty foods",
+						"duration_minutes": 30,
+						"type": "diet"
+					},
+					{
+						"id": "no_alcohol",
+						"title": "Avoid alcohol before bedtime",
+						"description": "Alcohol may help you fall asleep but reduces sleep quality",
+						"duration_minutes": 0,
+						"type": "habit"
+					}
+				]
+			},
+			"5": {
+				"title": "Day 5: Wind Down Activities",
+				"tasks": [
+					{
+						"id": "journaling",
+						"title": "Write in a gratitude journal",
+						"description": "Write 3 things you're grateful for",
+						"duration_minutes": 10,
+						"type": "reflection"
+					},
+					{
+						"id": "gentle_stretch",
+						"title": "Gentle stretching or yoga",
+						"description": "Do relaxing stretches before bed",
+						"duration_minutes": 15,
+						"type": "exercise"
+					},
+					{
+						"id": "aromatherapy",
+						"title": "Use calming scents",
+						"description": "Try lavender essential oil or scented candles",
+						"duration_minutes": 5,
+						"type": "relaxation"
+					}
+				]
+			},
+			"6": {
+				"title": "Day 6: Monitor & Adjust",
+				"tasks": [
+					{
+						"id": "sleep_tracker",
+						"title": "Track your sleep patterns",
+						"description": "Note what time you went to bed and woke up",
+						"duration_minutes": 5,
+						"type": "tracking"
+					},
+					{
+						"id": "adjust_routine",
+						"title": "Adjust your routine if needed",
+						"description": "Make small changes based on what works for you",
+						"duration_minutes": 10,
+						"type": "reflection"
+					},
+					{
+						"id": "relaxation_technique",
+						"title": "Try a new relaxation technique",
+						"description": "Experiment with different methods to find what helps you",
+						"duration_minutes": 15,
+						"type": "experiment"
+					}
+				]
+			},
+			"7": {
+				"title": "Day 7: Maintain & Build Habits",
+				"tasks": [
+					{
+						"id": "review_progress",
+						"title": "Review your sleep improvement",
+						"description": "Note how you feel compared to Day 1",
+						"duration_minutes": 10,
+						"type": "reflection"
+					},
+					{
+						"id": "create_plan",
+						"title": "Create a long-term sleep plan",
+						"description": "Choose 3-4 habits you want to maintain",
+						"duration_minutes": 15,
+						"type": "planning"
+					},
+					{
+						"id": "celebrate_success",
+						"title": "Celebrate your progress",
+						"description": "Reward yourself for completing the 7-day program",
+						"duration_minutes": 10,
+						"type": "celebration"
+					}
+				]
+			}
+		}
+	},
+	"anxiety_grounding": {
+		"name": "Anxiety Grounding (5 Days)",
+		"description": "5-day program to learn grounding techniques for managing anxiety",
+		"duration_days": 5,
+		"target_audience": "first_jobbers",
+		"days": {
+			"1": {
+				"title": "Day 1: 5-4-3-2-1 Grounding Technique",
+				"tasks": [
+					{
+						"id": "five_things",
+						"title": "Name 5 things you can see",
+						"description": "Look around and identify 5 objects in your environment",
+						"duration_minutes": 2,
+						"type": "grounding"
+					},
+					{
+						"id": "four_things",
+						"title": "Name 4 things you can touch",
+						"description": "Feel different textures around you",
+						"duration_minutes": 2,
+						"type": "grounding"
+					},
+					{
+						"id": "three_things",
+						"title": "Name 3 things you can hear",
+						"description": "Listen to sounds in your environment",
+						"duration_minutes": 2,
+						"type": "grounding"
+					},
+					{
+						"id": "two_things",
+						"title": "Name 2 things you can smell",
+						"description": "Identify scents around you",
+						"duration_minutes": 2,
+						"type": "grounding"
+					},
+					{
+						"id": "one_thing",
+						"title": "Name 1 thing you can taste",
+						"description": "Focus on a taste sensation",
+						"duration_minutes": 2,
+						"type": "grounding"
+					}
+				]
+			},
+			"2": {
+				"title": "Day 2: Breathing Exercises",
+				"tasks": [
+					{
+						"id": "box_breathing",
+						"title": "Box Breathing (4-4-4-4)",
+						"description": "Inhale for 4 counts, hold for 4, exhale for 4, hold for 4",
+						"duration_minutes": 5,
+						"type": "breathing"
+					},
+					{
+						"id": "belly_breathing",
+						"title": "Deep Belly Breathing",
+						"description": "Place hand on belly, breathe deeply into your diaphragm",
+						"duration_minutes": 5,
+						"type": "breathing"
+					},
+					{
+						"id": "counted_breaths",
+						"title": "Counted Breaths",
+						"description": "Count to 10 on inhale, 10 on exhale, repeat 5 times",
+						"duration_minutes": 5,
+						"type": "breathing"
+					}
+				]
+			},
+			"3": {
+				"title": "Day 3: Physical Grounding",
+				"tasks": [
+					{
+						"id": "hold_object",
+						"title": "Hold a comforting object",
+						"description": "Hold something with a pleasant texture or temperature",
+						"duration_minutes": 3,
+						"type": "physical"
+					},
+					{
+						"id": "stomp_feet",
+						"title": "Stomp your feet firmly",
+						"description": "Feel the ground beneath you, release tension",
+						"duration_minutes": 2,
+						"type": "physical"
+					},
+					{
+						"id": "tense_release",
+						"title": "Progressive muscle tension and release",
+						"description": "Tense and relax different muscle groups",
+						"duration_minutes": 10,
+						"type": "physical"
+					}
+				]
+			},
+			"4": {
+				"title": "Day 4: Mental Grounding",
+				"tasks": [
+					{
+						"id": "category_game",
+						"title": "Category naming game",
+						"description": "Name 10 items in a category (colors, animals, foods)",
+						"duration_minutes": 5,
+						"type": "mental"
+					},
+					{
+						"id": "memory_recall",
+						"title": "Recall a positive memory",
+						"description": "Think of a happy memory in detail",
+						"duration_minutes": 5,
+						"type": "mental"
+					},
+					{
+						"id": "gratitude_list",
+						"title": "Make a quick gratitude list",
+						"description": "List 5 things you're grateful for right now",
+						"duration_minutes": 5,
+						"type": "mental"
+					}
+				]
+			},
+			"5": {
+				"title": "Day 5: Integration & Practice",
+				"tasks": [
+					{
+						"id": "combine_techniques",
+						"title": "Combine 2-3 techniques",
+						"description": "Use multiple grounding methods together",
+						"duration_minutes": 10,
+						"type": "practice"
+					},
+					{
+						"id": "create_plan",
+						"title": "Create a personal anxiety plan",
+						"description": "Choose your favorite techniques for future use",
+						"duration_minutes": 10,
+						"type": "planning"
+					},
+					{
+						"id": "practice_scenario",
+						"title": "Practice in a low-stress situation",
+						"description": "Use techniques proactively, not just during anxiety",
+						"duration_minutes": 10,
+						"type": "practice"
+					}
+				]
+			}
+		}
+	}
+}

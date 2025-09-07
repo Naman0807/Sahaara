@@ -1,0 +1,52 @@
+{
+	"family_dynamics": {
+		"description": "Indian families often play a central role in decision-making, including mental health choices.",
+		"considerations": [
+			"Encourage family involvement when appropriate",
+			"Address concerns about family reputation",
+			"Provide resources for family education on mental health"
+		]
+	},
+	"stigma": {
+		"description": "Mental health stigma is prevalent in Indian society.",
+		"considerations": [
+			"Use neutral, non-stigmatizing language",
+			"Emphasize that se`eking help is a sign of strength",
+			"Provide anonymous support options"
+		]
+	},
+	"regional_variations": {
+		"north_india": {
+			"languages": ["Hindi", "Punjabi", "Urdu"],
+			"cultural_norms": ["Strong family ties", "Emphasis on education"]
+		},
+		"south_india": {
+			"languages": ["Tamil", "Telugu", "Kannada", "Malayalam"],
+			"cultural_norms": ["Respect for elders", "Community support systems"]
+		},
+		"east_india": {
+			"languages": ["Bengali", "Odia", "Assamese"],
+			"cultural_norms": ["Artistic expression", "Festival celebrations"]
+		},
+		"west_india": {
+			"languages": ["Marathi", "Gujarati"],
+			"cultural_norms": ["Entrepreneurial spirit", "Diverse communities"]
+		}
+	},
+	"festival_stress": {
+		"description": "Festivals can be both joyful and stressful periods.",
+		"tips": [
+			"Maintain routines during festivals",
+			"Set boundaries with family expectations",
+			"Use festivals as opportunities for self-care"
+		]
+	},
+	"exam_season": {
+		"description": "Exam periods are particularly stressful for students.",
+		"tips": [
+			"Encourage balanced study schedules",
+			"Promote physical activity and breaks",
+			"Address parental pressure concerns"
+		]
+	}
+}

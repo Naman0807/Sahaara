@@ -1,0 +1,32 @@
+{
+	"crisis_keywords": [
+		"suicide",
+		"self-harm",
+		"ending life",
+		"can't go on",
+		"आत्महत्या",
+		"आत्म-हानि",
+		"जीवन समाप्त करना",
+		"नहीं जा सकता"
+	],
+	"escalation_steps": [
+		"Detect crisis keywords in user message",
+		"Log crisis in database with anonymized data",
+		"Provide immediate empathetic response",
+		"Display helpline information prominently",
+		"Escalate to human support if available",
+		"Follow up with user if possible"
+	],
+	"helplines": {
+		"national": "+91-9152987821 (COOJ)",
+		"vandrevala": "9999666555",
+		"sneha": "044-24640050"
+	},
+	"cultural_considerations": [
+		"Respect family involvement in mental health decisions",
+		"Address stigma around seeking professional help",
+		"Consider regional variations in help-seeking behavior",
+		"Provide information in local languages",
+		"Include community-based support options"
+	]
+}

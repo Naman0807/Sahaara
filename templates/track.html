@@ -1,0 +1,333 @@
+{% extends "base.html" %} {% block title %}Wellness Tracking{% endblock %} {%
+block content %}
+<div class="container mt-4">
+	<h1 class="mb-4">Track Your Wellness Journey</h1>
+
+	<!-- Mood Logging Section -->
+	<div class="row mb-4">
+		<div class="col-md-6">
+			<div class="card shadow-sm">
+				<div class="card-header bg-primary text-white">
+					<h5 class="mb-0">
+						<i class="fas fa-heart"></i> How are you feeling today?
+					</h5>
+				</div>
+				<div class="card-body">
+					<form id="moodForm">
+						<div class="mb-3">
+							<input
+								type="range"
+								class="form-range"
+								id="moodSlider"
+								min="1"
+								max="10"
+								value="5"
+								step="1"
+							/>
+							<div class="d-flex justify-content-between text-muted small">
+								<span>😢 Very Low (1)</span>
+								<span id="moodValue" class="fw-bold">5</span>
+								<span>😊 Excellent (10)</span>
+							</div>
+						</div>
+						<div class="mb-3">
+							<div class="mood-emojis text-center">
+								<span id="moodEmoji" class="display-4">😐</span>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary w-100">
+							<i class="fas fa-save"></i> Log My Mood
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- Streak and Stats -->
+		<div class="col-md-6">
+			<div class="card shadow-sm mb-3">
+				<div class="card-header bg-success text-white">
+					<h5 class="mb-0"><i class="fas fa-fire"></i> Your Progress</h5>
+				</div>
+				<div class="card-body">
+					<div class="row text-center">
+						<div class="col-6">
+							<div class="stat-box">
+								<h3 id="streakCount" class="text-success mb-1">--</h3>
+								<p class="text-muted small mb-0">Day Streak</p>
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="stat-box">
+								<h3 id="weeklyAvg" class="text-info mb-1">--</h3>
+								<p class="text-muted small mb-0">Weekly Avg</p>
+							</div>
+						</div>
+					</div>
+					<hr />
+					<div id="weeklySummary" class="small text-muted">
+						<p>Loading your wellness summary...</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Quick Actions -->
+			<div class="card shadow-sm">
+				<div class="card-header bg-info text-white">
+					<h5 class="mb-0"><i class="fas fa-bolt"></i> Quick Actions</h5>
+				</div>
+				<div class="card-body">
+					<div class="d-grid gap-2">
+						<button
+							class="btn btn-outline-primary btn-sm"
+							onclick="scheduleBreathingNudge()"
+						>
+							<i class="fas fa-wind"></i> Remind me to breathe (1 hour)
+						</button>
+						<button
+							class="btn btn-outline-success btn-sm"
+							onclick="scheduleGratitudeNudge()"
+						>
+							<i class="fas fa-heart"></i> Gratitude reminder (2 hours)
+						</button>
+						<button
+							class="btn btn-outline-warning btn-sm"
+							onclick="scheduleBreakNudge()"
+						>
+							<i class="fas fa-coffee"></i> Take a break (30 min)
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Mood History Chart -->
+	<div class="row mb-4">
+		<div class="col-12">
+			<div class="card shadow-sm">
+				<div class="card-header bg-secondary text-white">
+					<h5 class="mb-0">
+						<i class="fas fa-chart-line"></i> Your Mood Journey
+					</h5>
+				</div>
+				<div class="card-body">
+					<canvas id="moodChart" height="100"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Recent Entries -->
+	<div class="row">
+		<div class="col-12">
+			<div class="card shadow-sm">
+				<div class="card-header">
+					<h5 class="mb-0">
+						<i class="fas fa-history"></i> Recent Mood Entries
+					</h5>
+				</div>
+				<div class="card-body">
+					<div id="recentEntries" class="list-group list-group-flush">
+						<div class="text-center text-muted">
+							<p>Loading recent entries...</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Mood Reminder Modal -->
+<div class="modal fade" id="moodReminderModal" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header bg-primary text-white">
+				<h5 class="modal-title">
+					<i class="fas fa-bell"></i> Mood Check-in Reminder
+				</h5>
+				<button
+					type="button"
+					class="btn-close btn-close-white"
+					data-bs-dismiss="modal"
+				></button>
+			</div>
+			<div class="modal-body text-center">
+				<div class="mb-3">
+					<i class="fas fa-heart text-primary" style="font-size: 3rem"></i>
+				</div>
+				<h6>How are you feeling today?</h6>
+				<p class="text-muted">
+					Taking a moment to check in with yourself can make a big difference.
+				</p>
+				<button class="btn btn-primary" onclick="openMoodTracker()">
+					<i class="fas fa-plus"></i> Log My Mood
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %} {% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/wellness.js') }}"></script>
+<script>
+	const moodHistory = {{ mood_history|tojson|safe }};
+
+		// Mood emoji mapping
+		const moodEmojis = {
+		    1: '😢', 2: '😞', 3: '😕', 4: '😐', 5: '🙂',
+		    6: '😊', 7: '😄', 8: '😃', 9: '🤗', 10: '😍'
+		};
+
+		// Update mood slider value and emoji
+		document.getElementById('moodSlider').addEventListener('input', function() {
+		    const value = this.value;
+		    document.getElementById('moodValue').textContent = value;
+		    document.getElementById('moodEmoji').textContent = moodEmojis[value] || '😐';
+		});
+
+		// Initialize emoji on page load
+		document.addEventListener('DOMContentLoaded', function() {
+		    const initialValue = document.getElementById('moodSlider').value;
+		    document.getElementById('moodValue').textContent = initialValue;
+		    document.getElementById('moodEmoji').textContent = moodEmojis[initialValue] || '😐';
+
+		    // Load streak and summary data
+		    loadWellnessStats();
+		    checkForReminders();
+		});
+
+		// Load wellness statistics
+		function loadWellnessStats() {
+		    // Load streak
+		    fetch('/api/mood/streak')
+		        .then(response => response.json())
+		        .then(data => {
+		            document.getElementById('streakCount').textContent = data.streak;
+		        })
+		        .catch(error => console.error('Error loading streak:', error));
+
+		    // Load weekly summary
+		    fetch('/api/mood/weekly-summary')
+		        .then(response => response.json())
+		        .then(data => {
+		            if (data.summary) {
+		                document.getElementById('weeklyAvg').textContent = data.summary.average_mood;
+		                updateWeeklySummary(data.summary);
+		            }
+		        })
+		        .catch(error => console.error('Error loading weekly summary:', error));
+		}
+
+		// Update weekly summary display
+		function updateWeeklySummary(summary) {
+		    const summaryDiv = document.getElementById('weeklySummary');
+		    summaryDiv.innerHTML = `
+		        <p class="mb-1"><strong>This week:</strong> ${summary.entries_count} entries</p>
+		        <p class="mb-1"><strong>Best day:</strong> ${new Date(summary.best_mood.date).toLocaleDateString()} (${summary.best_mood.mood}/10)</p>
+		        <p class="mb-0"><strong>Worst day:</strong> ${new Date(summary.worst_mood.date).toLocaleDateString()} (${summary.worst_mood.mood}/10)</p>
+		    `;
+		}
+
+		// Check for pending reminders
+		function checkForReminders() {
+		    fetch('/api/mood/reminder/check')
+		        .then(response => response.json())
+		        .then(data => {
+		            if (data.should_remind) {
+		                showMoodReminder();
+		            }
+		        })
+		        .catch(error => console.error('Error checking reminders:', error));
+
+		    // Check for pending nudges
+		    fetch('/api/nudges/pending')
+		        .then(response => response.json())
+		        .then(data => {
+		            if (data.nudges && data.nudges.length > 0) {
+		                data.nudges.forEach(nudge => {
+		                    showNudge(nudge);
+		                });
+		            }
+		        })
+		        .catch(error => console.error('Error checking nudges:', error));
+		}
+
+		// Show mood reminder modal
+		function showMoodReminder() {
+		    const modal = new bootstrap.Modal(document.getElementById('moodReminderModal'));
+		    modal.show();
+		}
+
+		// Show nudge notification
+		function showNudge(nudge) {
+		    // Simple alert for now - could be enhanced with toast notifications
+		    let message = '';
+		    switch(nudge.type) {
+		        case 'breathing':
+		            message = '🌬️ Time for some deep breathing exercises!';
+		            break;
+		        case 'gratitude':
+		            message = '🙏 Take a moment to practice gratitude.';
+		            break;
+		        case 'break':
+		            message = '☕ Time for a well-deserved break!';
+		            break;
+		        default:
+		            message = '🔔 Wellness reminder: ' + nudge.type;
+		    }
+		    alert(message);
+		}
+
+		// Quick action functions
+		function scheduleBreathingNudge() {
+		    scheduleNudge('breathing');
+		}
+
+		function scheduleGratitudeNudge() {
+		    scheduleNudge('gratitude');
+		}
+
+		function scheduleBreakNudge() {
+		    scheduleNudge('break');
+		}
+
+		function scheduleNudge(type) {
+		    const now = new Date();
+		    now.setHours(now.getHours() + 1); // Schedule for 1 hour from now
+
+		    fetch('/api/nudges/schedule', {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json',
+		        },
+		        body: JSON.stringify({
+		            type: type,
+		            scheduled_time: now.toISOString()
+		        })
+		    })
+		    .then(response => response.json())
+		    .then(data => {
+		        if (data.success) {
+		            alert('Reminder scheduled successfully!');
+		        } else {
+		            alert('Error scheduling reminder: ' + (data.error || 'Unknown error'));
+		        }
+		    })
+		    .catch(error => {
+		        console.error('Error:', error);
+		        alert('An error occurred while scheduling the reminder.');
+		    });
+		}
+
+		function openMoodTracker() {
+		    // Close modal and scroll to mood logging section
+		    const modal = bootstrap.Modal.getInstance(document.getElementById('moodReminderModal'));
+		    if (modal) {
+		        modal.hide();
+		    }
+		    document.getElementById('moodSlider').scrollIntoView({ behavior: 'smooth' });
+		}
+</script>
+{% endblock %}

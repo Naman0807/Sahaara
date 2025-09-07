@@ -1,0 +1,301 @@
+{% extends "base.html" %} {% block title %}Micro-Plans - Mental Wellness{%
+endblock %} {% block content %}
+<div class="container mt-4">
+	<h1 class="mb-4">Mental Wellness Micro-Plans</h1>
+
+	<!-- Active Plans Section -->
+	{% if active_plans %}
+	<div class="row mb-5">
+		<div class="col-12">
+			<h2 class="mb-3">Your Active Plans</h2>
+			<div class="row">
+				{% for plan_info in active_plans %}
+				<div class="col-md-6 col-lg-4 mb-4">
+					<div class="card h-100 shadow-sm">
+						<div class="card-body">
+							<h5 class="card-title">{{ plan_info.plan_data.name }}</h5>
+							<p class="card-text">{{ plan_info.plan_data.description }}</p>
+							<div class="mb-3">
+								<div class="progress">
+									<div
+										class="progress-bar"
+										role="progressbar"
+										style="width: {{ ((plan_info.progress.current_day / plan_info.plan_data.duration_days * 100)|round|int) }}%"
+										aria-valuenow="{{ plan_info.progress.current_day }}"
+										aria-valuemin="0"
+										aria-valuemax="{{ plan_info.plan_data.duration_days }}"
+									>
+										Day {{ plan_info.progress.current_day }} of {{
+										plan_info.plan_data.duration_days }}
+									</div>
+								</div>
+							</div>
+							<p class="text-muted small">
+								Current: {{ plan_info.current_day_title }}
+							</p>
+							<a
+								href="#"
+								class="btn btn-primary btn-sm"
+								onclick="viewPlanDetails('{{ plan_info.progress.plan_id }}')"
+							>
+								Continue Plan
+							</a>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	{% endif %}
+
+	<!-- Available Plans Section -->
+	<div class="row mb-5">
+		<div class="col-12">
+			<h2 class="mb-3">Available Micro-Plans</h2>
+			<div class="row">
+				{% for plan_id, plan in available_plans.items() %}
+				<div class="col-md-6 col-lg-4 mb-4">
+					<div class="card h-100 shadow-sm">
+						<div class="card-body">
+							<h5 class="card-title">{{ plan.name }}</h5>
+							<p class="card-text">{{ plan.description }}</p>
+							<ul class="list-unstyled small text-muted mb-3">
+								<li>
+									<i class="fas fa-calendar-alt"></i> {{ plan.duration_days }}
+									days
+								</li>
+								<li>
+									<i class="fas fa-user"></i> For {{
+									plan.target_audience|replace('_', ' ')|title }}
+								</li>
+							</ul>
+							<button
+								class="btn btn-success btn-sm"
+								onclick="enrollInPlan('{{ plan_id }}')"
+							>
+								Start Plan
+							</button>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+	<!-- Completed Plans Section -->
+	{% if completed_plans %}
+	<div class="row">
+		<div class="col-12">
+			<h2 class="mb-3">Completed Plans</h2>
+			<div class="row">
+				{% for plan_info in completed_plans %}
+				<div class="col-md-6 col-lg-4 mb-4">
+					<div class="card h-100 shadow-sm border-success">
+						<div class="card-body">
+							<h5 class="card-title">{{ plan_info.plan_data.name }}</h5>
+							<p class="card-text">{{ plan_info.plan_data.description }}</p>
+							<div class="mb-3">
+								<span class="badge badge-success">Completed</span>
+								{% if plan_info.days_taken %}
+								<p class="text-muted small mb-0">
+									Completed in {{ plan_info.days_taken }} days
+								</p>
+								{% endif %}
+							</div>
+							<button
+								class="btn btn-outline-success btn-sm"
+								onclick="viewCompletedPlan('{{ plan_info.progress.plan_id }}')"
+							>
+								View Details
+							</button>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	{% endif %}
+</div>
+
+<!-- Plan Details Modal -->
+<div
+	class="modal fade"
+	id="planDetailsModal"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="planDetailsModalLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="planDetailsModalLabel">Plan Details</h5>
+				<button
+					type="button"
+					class="close"
+					data-dismiss="modal"
+					aria-label="Close"
+				>
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" id="planDetailsContent">
+				<!-- Plan details will be loaded here -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	function enrollInPlan(planId) {
+		if (
+			confirm(
+				"Are you ready to start this micro-plan? You'll commit to completing the daily tasks."
+			)
+		) {
+			fetch("/api/micro-plans/enroll", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ plan_id: planId }),
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					if (data.success) {
+						alert("Successfully enrolled! Refreshing page...");
+						location.reload();
+					} else {
+						alert("Error: " + data.error);
+					}
+				})
+				.catch((error) => {
+					console.error("Error:", error);
+					alert("An error occurred while enrolling.");
+				});
+		}
+	}
+
+	function viewPlanDetails(planId) {
+		fetch(`/api/micro-plans/progress/${planId}`)
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.success) {
+					displayPlanDetails(data);
+					$("#planDetailsModal").modal("show");
+				} else {
+					alert("Error: " + data.error);
+				}
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+				alert("An error occurred while loading plan details.");
+			});
+	}
+
+	function viewCompletedPlan(planId) {
+		viewPlanDetails(planId);
+	}
+
+	function displayPlanDetails(data) {
+		const plan = data.plan;
+		const progress = data.progress;
+		const currentDayData = data.current_day_data;
+
+		let html = `
+        <div class="mb-3">
+            <h4>${plan.name}</h4>
+            <p>${plan.description}</p>
+            <div class="progress mb-3">
+                <div class="progress-bar" role="progressbar" style="width: ${
+									progress.completion_percentage
+								}%">
+                    ${Math.round(progress.completion_percentage)}% Complete
+                </div>
+            </div>
+        </div>
+    `;
+
+		if (!progress.is_completed && currentDayData) {
+			html += `
+            <div class="mb-4">
+                <h5>Day ${progress.current_day}: ${currentDayData.title}</h5>
+                <div class="list-group">
+        `;
+
+			currentDayData.tasks.forEach((task) => {
+				const isCompleted =
+					progress.completed_tasks &&
+					progress.completed_tasks.includes(task.id);
+				const buttonClass = isCompleted ? "btn-success" : "btn-outline-primary";
+				const buttonText = isCompleted ? "Completed" : "Mark Complete";
+
+				html += `
+                <div class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">${task.title}</h6>
+                            <p class="mb-1">${task.description}</p>
+                            <small class="text-muted">${
+															task.duration_minutes
+														} minutes</small>
+                        </div>
+                        <button class="btn btn-sm ${buttonClass}"
+                                onclick="completeTask('${plan.id}', ${
+					progress.current_day
+				}, '${task.id}')"
+                                ${isCompleted ? "disabled" : ""}>
+                            ${buttonText}
+                        </button>
+                    </div>
+                </div>
+            `;
+			});
+
+			html += `
+                </div>
+            </div>
+        `;
+		} else if (progress.is_completed) {
+			html += `
+            <div class="alert alert-success">
+                <h5>Congratulations!</h5>
+                <p>You have successfully completed this micro-plan!</p>
+            </div>
+        `;
+		}
+
+		document.getElementById("planDetailsContent").innerHTML = html;
+	}
+
+	function completeTask(planId, day, taskId) {
+		fetch("/api/micro-plans/task/complete", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				plan_id: planId,
+				day: day,
+				task_id: taskId,
+			}),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.success) {
+					// Refresh the modal content
+					viewPlanDetails(planId);
+				} else {
+					alert("Error: " + data.error);
+				}
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+				alert("An error occurred while completing the task.");
+			});
+	}
+</script>
+{% endblock %}

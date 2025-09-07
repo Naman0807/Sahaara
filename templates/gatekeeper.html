@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% block title %}Gatekeeper Dashboard{% endblock %} {%
+block content %}
+<div class="row justify-content-center">
+	<div class="col-md-10">
+		<h2 class="mb-4">Gatekeeper Dashboard</h2>
+		<p class="text-muted">
+			Anonymized insights for mental health awareness and resource distribution.
+		</p>
+
+		<div class="row">
+			<div class="col-md-4 mb-4">
+				<div class="card text-center">
+					<div class="card-body">
+						<h3 class="card-title text-primary">{{ total_crises }}</h3>
+						<p class="card-text">Total Crisis Detections</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 mb-4">
+				<div class="card text-center">
+					<div class="card-body">
+						<h3 class="card-title text-warning">{{ escalated }}</h3>
+						<p class="card-text">Escalated Cases</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 mb-4">
+				<div class="card text-center">
+					<div class="card-body">
+						<h3 class="card-title text-success">
+							{{ (escalated / total_crises * 100)|round(1) if total_crises > 0
+							else 0 }}%
+						</h3>
+						<p class="card-text">Escalation Rate</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-header">
+				<h5>Resource Distribution Packs</h5>
+			</div>
+			<div class="card-body">
+				<p>
+					Download anonymized reports and resource packs for schools and NGOs.
+				</p>
+				<button class="btn btn-outline-primary">Download Report</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

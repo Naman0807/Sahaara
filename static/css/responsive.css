@@ -1,0 +1,70 @@
+/* Mobile-first responsive design */
+
+@media (max-width: 576px) {
+	.container {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+
+	.navbar-brand {
+		font-size: 1.2rem;
+	}
+
+	.card-body {
+		padding: 1rem;
+	}
+
+	#chatMessages {
+		height: 300px;
+	}
+
+	.input-group {
+		flex-direction: column;
+	}
+
+	.input-group .form-control {
+		margin-bottom: 10px;
+	}
+
+	.btn {
+		width: 100%;
+	}
+}
+
+@media (max-width: 768px) {
+	.col-md-4 {
+		margin-bottom: 1rem;
+	}
+
+	.card-title {
+		font-size: 1.1rem;
+	}
+
+	.lead {
+		font-size: 1rem;
+	}
+}
+
+@media (min-width: 992px) {
+	.container {
+		max-width: 960px;
+	}
+}
+
+/* Accessibility improvements */
+.btn:focus,
+.form-control:focus {
+	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}

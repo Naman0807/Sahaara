@@ -1,0 +1,528 @@
+{% extends "base.html" %} {% block title %}Welcome to Youth Mental Wellness{%
+endblock %} {% block head %}
+<style>
+	.hero-section {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		padding: 80px 0;
+		margin-bottom: 60px;
+	}
+
+	.feature-card {
+		background: white;
+		border-radius: 15px;
+		padding: 30px;
+		text-align: center;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		height: 100%;
+		border: none;
+	}
+
+	.feature-card:hover {
+		transform: translateY(-10px);
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+	}
+
+	.feature-icon {
+		font-size: 3rem;
+		color: #007bff;
+		margin-bottom: 20px;
+	}
+
+	.feature-title {
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin-bottom: 15px;
+		color: #333;
+	}
+
+	.feature-description {
+		color: #666;
+		margin-bottom: 25px;
+		line-height: 1.6;
+	}
+
+	.btn-feature {
+		background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+		border: none;
+		border-radius: 25px;
+		padding: 12px 30px;
+		font-weight: 600;
+		transition: all 0.3s ease;
+	}
+
+	.btn-feature:hover {
+		transform: scale(1.05);
+		box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+	}
+
+	.btn-outline-feature {
+		border: 2px solid #007bff;
+		color: #007bff;
+		background: transparent;
+		border-radius: 25px;
+		padding: 10px 25px;
+		font-weight: 600;
+		transition: all 0.3s ease;
+	}
+
+	.btn-outline-feature:hover {
+		background: #007bff;
+		color: white;
+		transform: scale(1.05);
+	}
+
+	.stats-section {
+		background: #f8f9fa;
+		padding: 60px 0;
+		margin-bottom: 60px;
+	}
+
+	.stat-item {
+		text-align: center;
+	}
+
+	.stat-number {
+		font-size: 2.5rem;
+		font-weight: bold;
+		color: #007bff;
+		margin-bottom: 10px;
+	}
+
+	.stat-label {
+		color: #666;
+		font-size: 1.1rem;
+	}
+
+	.testimonial-section {
+		padding: 60px 0;
+		margin-bottom: 60px;
+	}
+
+	.testimonial-card {
+		background: white;
+		border-radius: 15px;
+		padding: 30px;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+		margin-bottom: 30px;
+	}
+
+	.testimonial-text {
+		font-style: italic;
+		color: #555;
+		margin-bottom: 20px;
+		font-size: 1.1rem;
+	}
+
+	.testimonial-author {
+		font-weight: 600;
+		color: #333;
+	}
+
+	.cta-section {
+		background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+		color: white;
+		padding: 60px 0;
+		text-align: center;
+	}
+
+	.cta-title {
+		font-size: 2.5rem;
+		margin-bottom: 20px;
+	}
+
+	.cta-description {
+		font-size: 1.2rem;
+		margin-bottom: 30px;
+		opacity: 0.9;
+	}
+
+	.btn-cta {
+		background: white;
+		color: #28a745;
+		border: none;
+		border-radius: 30px;
+		padding: 15px 40px;
+		font-size: 1.1rem;
+		font-weight: 600;
+		transition: all 0.3s ease;
+	}
+
+	.btn-cta:hover {
+		transform: scale(1.05);
+		box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
+	}
+</style>
+{% endblock %} {% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-8 text-center">
+				<h1 class="display-4 mb-4">Your Mental Wellness Companion</h1>
+				<p class="lead mb-5 fs-4">
+					A safe, confidential space for  youth to talk, learn, grow, and
+					track their mental wellness journey.
+				</p>
+				<a href="{{ url_for('chat') }}" class="btn btn-light btn-lg me-3">
+					<i class="fas fa-comments"></i>
+					Start Chatting
+				</a>
+				<a href="{{ url_for('journal') }}" class="btn btn-outline-light btn-lg">
+					<i class="fas fa-book-open"></i>
+					Write in Journal
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Features Section -->
+<div class="container">
+	<div class="row">
+		<div class="col-12 text-center mb-5">
+			<h2 class="display-5">Comprehensive Wellness Tools</h2>
+			<p class="lead text-muted">
+				Everything you need for your mental health journey
+			</p>
+		</div>
+	</div>
+
+	<div class="row">
+		<!-- Chat Support -->
+		<div class="col-lg-3 col-md-6 mb-4">
+			<div class="feature-card">
+				<div class="feature-icon">
+					<i class="fas fa-comments"></i>
+				</div>
+				<h5 class="feature-title">AI Chat Support</h5>
+				<p class="feature-description">
+					Talk to our AI companion in English or Hinglish about your feelings,
+					stress, and daily challenges.
+				</p>
+				<a href="{{ url_for('chat') }}" class="btn btn-feature">Start Chat</a>
+			</div>
+		</div>
+
+		<!-- Journal -->
+		<div class="col-lg-3 col-md-6 mb-4">
+			<div class="feature-card">
+				<div class="feature-icon">
+					<i class="fas fa-book-open"></i>
+				</div>
+				<h5 class="feature-title">Private Journal</h5>
+				<p class="feature-description">
+					Write encrypted journal entries, track your mood, and reflect on your
+					thoughts safely.
+				</p>
+				<a href="{{ url_for('journal') }}" class="btn btn-feature">Write Now</a>
+			</div>
+		</div>
+
+		<!-- Study Timer -->
+		<div class="col-lg-3 col-md-6 mb-4">
+			<div class="feature-card">
+				<div class="feature-icon">
+					<i class="fas fa-clock"></i>
+				</div>
+				<h5 class="feature-title">Study Timer</h5>
+				<p class="feature-description">
+					Focus on your studies with timed sessions, productivity tracking, and
+					personalized goals.
+				</p>
+				<a href="{{ url_for('study_timer') }}" class="btn btn-feature"
+					>Start Session</a
+				>
+			</div>
+		</div>
+
+		<!-- Wellness Tracker -->
+		<div class="col-lg-3 col-md-6 mb-4">
+			<div class="feature-card">
+				<div class="feature-icon">
+					<i class="fas fa-chart-line"></i>
+				</div>
+				<h5 class="feature-title">Wellness Tracker</h5>
+				<p class="feature-description">
+					Log your mood, track patterns, and receive personalized wellness
+					insights and reminders.
+				</p>
+				<a href="{{ url_for('track') }}" class="btn btn-feature">Track Mood</a>
+			</div>
+		</div>
+
+		<!-- Micro Plans -->
+		<div class="col-lg-3 col-md-6 mb-4">
+			<div class="feature-card">
+				<div class="feature-icon">
+					<i class="fas fa-tasks"></i>
+				</div>
+				<h5 class="feature-title">Micro Wellness Plans</h5>
+				<p class="feature-description">
+					Follow personalized 7-day wellness plans with daily tasks and progress
+					tracking.
+				</p>
+				<a href="{{ url_for('micro_plans') }}" class="btn btn-feature"
+					>View Plans</a
+				>
+			</div>
+		</div>
+
+		<!-- Myths & Facts -->
+		<div class="col-lg-3 col-md-6 mb-4">
+			<div class="feature-card">
+				<div class="feature-icon">
+					<i class="fas fa-lightbulb"></i>
+				</div>
+				<h5 class="feature-title">Myths & Facts</h5>
+				<p class="feature-description">
+					Learn about mental health through verified information and debunk
+					common myths.
+				</p>
+				<a href="{{ url_for('myths_facts') }}" class="btn btn-feature"
+					>Explore</a
+				>
+			</div>
+		</div>
+
+		<!-- Badges -->
+		<div class="col-lg-3 col-md-6 mb-4">
+			<div class="feature-card">
+				<div class="feature-icon">
+					<i class="fas fa-trophy"></i>
+				</div>
+				<h5 class="feature-title">Achievement Badges</h5>
+				<p class="feature-description">
+					Earn badges for your wellness journey milestones and consistent
+					healthy habits.
+				</p>
+				<button class="btn btn-feature" onclick="showBadges()">
+					View Badges
+				</button>
+			</div>
+		</div>
+
+		<!-- Emergency Support -->
+		<div class="col-lg-3 col-md-6 mb-4">
+			<div class="feature-card">
+				<div class="feature-icon">
+					<i class="fas fa-shield-alt"></i>
+				</div>
+				<h5 class="feature-title">Emergency Support</h5>
+				<p class="feature-description">
+					Access immediate help and regional helpline numbers when you need it
+					most.
+				</p>
+				<a href="{{ url_for('crisis') }}" class="btn btn-feature">Get Help</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Stats Section -->
+<section class="stats-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 text-center mb-5">
+				<h2>Your Wellness Journey</h2>
+				<p class="text-muted">Track your progress and achievements</p>
+			</div>
+		</div>
+		<div class="row" id="user-stats">
+			<div class="col-md-3 stat-item">
+				<div class="stat-number" id="mood-streak">0</div>
+				<div class="stat-label">Day Mood Streak</div>
+			</div>
+			<div class="col-md-3 stat-item">
+				<div class="stat-number" id="journal-entries">0</div>
+				<div class="stat-label">Journal Entries</div>
+			</div>
+			<div class="col-md-3 stat-item">
+				<div class="stat-number" id="study-sessions">0</div>
+				<div class="stat-label">Study Sessions</div>
+			</div>
+			<div class="col-md-3 stat-item">
+				<div class="stat-number" id="earned-badges">0</div>
+				<div class="stat-label">Badges Earned</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonial-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 text-center mb-5">
+				<h2>What Our Users Say</h2>
+				<p class="text-muted">Real stories from real people</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="testimonial-card">
+					<div class="testimonial-text">
+						"The journal feature helped me process my thoughts safely. Being
+						able to encrypt my entries gave me the confidence to be completely
+						honest."
+					</div>
+					<div class="testimonial-author">- Priya, Class 12 Student</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="testimonial-card">
+					<div class="testimonial-text">
+						"The study timer with mood tracking helped me understand how my
+						mental state affects my productivity. It's been a game changer!"
+					</div>
+					<div class="testimonial-author">- Rohan, College Student</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="testimonial-card">
+					<div class="testimonial-text">
+						"Having access to verified mental health information in one place,
+						plus the emergency helplines, gives me peace of mind."
+					</div>
+					<div class="testimonial-author">- Anjali, Working Professional</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+	<div class="container">
+		<h2 class="cta-title">Ready to Start Your Journey?</h2>
+		<p class="cta-description">
+			Your mental wellness matters. Take the first step towards a healthier,
+			happier you.
+		</p>
+		<a href="{{ url_for('chat') }}" class="btn btn-cta btn-lg">
+			<i class="fas fa-rocket"></i>
+			Begin Your Wellness Journey
+		</a>
+	</div>
+</section>
+
+<!-- Badge Modal -->
+<div class="modal fade" id="badgeModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Your Achievement Badges</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" id="badgeModalBody">
+				<div class="text-center">
+					<div class="spinner-border" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %} {% block scripts %}
+<script>
+	function selectPersona(persona) {
+		fetch("/set_persona", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ persona: persona }),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.success) {
+					window.location.href = "/chat";
+				}
+			});
+	}
+
+	function showBadges() {
+		$("#badgeModal").modal("show");
+
+		// Load user badges
+		Promise.all([
+			fetch("/api/badges").then((r) => r.json()),
+			fetch("/api/badges/progress").then((r) => r.json()),
+		])
+			.then(([earnedData, progressData]) => {
+				const earnedBadges = earnedData.badges;
+				const progress = progressData.progress;
+
+				let html = '<div class="row">';
+
+				progress.forEach((badge) => {
+					const earned = earnedBadges.find((eb) => eb.id === badge.id);
+					const earnedClass = earned ? "earned" : "";
+					const earnedDate = earned
+						? new Date(earned.earned_at).toLocaleDateString()
+						: "";
+
+					html += `
+                <div class="col-md-4 mb-3">
+                    <div class="card ${earnedClass}" style="border: 2px solid ${
+						earned ? "#28a745" : "#ddd"
+					}">
+                        <div class="card-body text-center">
+                            <div style="font-size: 2rem; color: ${
+															badge.color
+														}">${badge.icon || "🏆"}</div>
+                            <h6 class="card-title">${badge.name}</h6>
+                            <p class="card-text small">${badge.description}</p>
+                            ${
+															earned
+																? `<div class="text-success"><i class="fas fa-check"></i> Earned ${earnedDate}</div>`
+																: `<div class="text-muted">Progress: ${badge.percentage}%</div>`
+														}
+                        </div>
+                    </div>
+                </div>
+            `;
+				});
+
+				html += "</div>";
+				document.getElementById("badgeModalBody").innerHTML = html;
+			})
+			.catch((error) => {
+				console.error("Error loading badges:", error);
+				document.getElementById("badgeModalBody").innerHTML =
+					'<p class="text-center text-muted">Unable to load badges at this time.</p>';
+			});
+	}
+
+	// Load user stats on page load
+	document.addEventListener("DOMContentLoaded", function () {
+		loadUserStats();
+	});
+
+	function loadUserStats() {
+		// Load various stats
+		Promise.all([
+			fetch("/api/mood/streak").then((r) => r.json()),
+			fetch("/api/journal/stats").then((r) => r.json()),
+			fetch("/api/study/stats").then((r) => r.json()),
+			fetch("/api/badges/stats").then((r) => r.json()),
+		])
+			.then(([moodData, journalData, studyData, badgeData]) => {
+				document.getElementById("mood-streak").textContent = moodData.streak;
+				document.getElementById("journal-entries").textContent =
+					journalData.stats.total_entries;
+				document.getElementById("study-sessions").textContent =
+					studyData.stats.total_sessions;
+				document.getElementById("earned-badges").textContent =
+					badgeData.stats.earned_badges;
+			})
+			.catch((error) => {
+				console.error("Error loading stats:", error);
+			});
+	}
+</script>
+{% endblock %}

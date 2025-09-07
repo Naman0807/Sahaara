@@ -1,0 +1,1019 @@
+{% extends "base.html" %} {% block title %}Study Timer - Youth Mental Wellness{%
+endblock %} {% block head %}
+<style>
+	.timer-container {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		border-radius: 20px;
+		padding: 40px;
+		color: white;
+		text-align: center;
+		margin-bottom: 30px;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+	}
+
+	.timer-display {
+		font-size: 4rem;
+		font-weight: 300;
+		font-family: "Courier New", monospace;
+		margin: 20px 0;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	}
+
+	.timer-controls {
+		margin-top: 30px;
+	}
+
+	.btn-timer {
+		border-radius: 50px;
+		padding: 15px 30px;
+		font-size: 1.1rem;
+		font-weight: 600;
+		margin: 0 10px;
+		border: none;
+		transition: all 0.3s ease;
+	}
+
+	.btn-start {
+		background: #28a745;
+		color: white;
+	}
+
+	.btn-start:hover {
+		background: #218838;
+		transform: scale(1.05);
+	}
+
+	.btn-stop {
+		background: #dc3545;
+		color: white;
+	}
+
+	.btn-stop:hover {
+		background: #c82333;
+		transform: scale(1.05);
+	}
+
+	.btn-pause {
+		background: #ffc107;
+		color: #000;
+	}
+
+	.btn-pause:hover {
+		background: #e0a800;
+		transform: scale(1.05);
+	}
+
+	.session-info {
+		background: white;
+		border-radius: 15px;
+		padding: 25px;
+		margin-bottom: 20px;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	.stats-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 20px;
+		margin-bottom: 30px;
+	}
+
+	.stat-card {
+		background: white;
+		border-radius: 15px;
+		padding: 20px;
+		text-align: center;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		transition: transform 0.3s ease;
+	}
+
+	.stat-card:hover {
+		transform: translateY(-5px);
+	}
+
+	.stat-value {
+		font-size: 2rem;
+		font-weight: bold;
+		color: #007bff;
+		margin-bottom: 5px;
+	}
+
+	.stat-label {
+		color: #666;
+		font-size: 0.9rem;
+	}
+
+	.insights-container {
+		background: #f8f9fa;
+		border-radius: 15px;
+		padding: 25px;
+		margin-bottom: 20px;
+	}
+
+	.insight-item {
+		display: flex;
+		align-items: center;
+		padding: 15px;
+		margin-bottom: 10px;
+		background: white;
+		border-radius: 10px;
+		border-left: 4px solid #007bff;
+	}
+
+	.insight-item.success {
+		border-left-color: #28a745;
+	}
+	.insight-item.warning {
+		border-left-color: #ffc107;
+	}
+	.insight-item.info {
+		border-left-color: #17a2b8;
+	}
+	.insight-item.danger {
+		border-left-color: #dc3545;
+	}
+
+	.insight-icon {
+		font-size: 1.5rem;
+		margin-right: 15px;
+		width: 30px;
+	}
+
+	.goal-item {
+		background: white;
+		border-radius: 10px;
+		padding: 20px;
+		margin-bottom: 15px;
+		border-left: 4px solid #007bff;
+	}
+
+	.goal-progress {
+		margin-top: 10px;
+	}
+
+	.progress {
+		height: 8px;
+		border-radius: 4px;
+	}
+
+	.session-list {
+		max-height: 400px;
+		overflow-y: auto;
+	}
+
+	.session-item {
+		background: white;
+		border-radius: 10px;
+		padding: 15px;
+		margin-bottom: 10px;
+		border-left: 4px solid #007bff;
+	}
+
+	.session-item.completed {
+		border-left-color: #28a745;
+	}
+	.session-item.paused {
+		border-left-color: #ffc107;
+	}
+
+	.productivity-rating {
+		display: inline-block;
+		padding: 2px 8px;
+		border-radius: 12px;
+		font-size: 0.8em;
+		font-weight: bold;
+	}
+
+	.rating-1,
+	.rating-2 {
+		background: #dc3545;
+		color: white;
+	}
+	.rating-3,
+	.rating-4 {
+		background: #ffc107;
+		color: #000;
+	}
+	.rating-5 {
+		background: #28a745;
+		color: white;
+	}
+
+	.mood-indicator {
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		border-radius: 50%;
+		margin-right: 5px;
+	}
+
+	.mood-1 {
+		background-color: #dc3545;
+	}
+	.mood-2 {
+		background-color: #fd7e14;
+	}
+	.mood-3 {
+		background-color: #ffc107;
+	}
+	.mood-4 {
+		background-color: #28a745;
+	}
+	.mood-5 {
+		background-color: #20c997;
+	}
+	.mood-6 {
+		background-color: #17a2b8;
+	}
+	.mood-7 {
+		background-color: #007bff;
+	}
+	.mood-8 {
+		background-color: #6f42c1;
+	}
+	.mood-9 {
+		background-color: #e83e8c;
+	}
+	.mood-10 {
+		background-color: #6c757d;
+	}
+
+	.form-section {
+		background: white;
+		border-radius: 15px;
+		padding: 25px;
+		margin-bottom: 20px;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	.form-group {
+		margin-bottom: 20px;
+	}
+
+	.form-control {
+		border-radius: 8px;
+		border: 2px solid #e9ecef;
+		padding: 12px;
+	}
+
+	.form-control:focus {
+		border-color: #007bff;
+		box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+	}
+
+	.btn-primary {
+		background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+		border: none;
+		border-radius: 25px;
+		padding: 12px 30px;
+		font-weight: 600;
+	}
+
+	.btn-secondary {
+		border-radius: 25px;
+		padding: 10px 25px;
+	}
+
+	.tabs-container {
+		margin-bottom: 30px;
+	}
+
+	.nav-tabs {
+		border: none;
+		background: #f8f9fa;
+		border-radius: 10px;
+		padding: 5px;
+	}
+
+	.nav-tabs .nav-link {
+		border: none;
+		border-radius: 8px;
+		color: #666;
+		font-weight: 500;
+	}
+
+	.nav-tabs .nav-link.active {
+		background: #007bff;
+		color: white;
+	}
+
+	.tab-content {
+		background: white;
+		border-radius: 15px;
+		padding: 25px;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+</style>
+{% endblock %} {% block content %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-12">
+			<h1 class="text-center mb-4">
+				<i class="fas fa-clock text-primary"></i>
+				Study Timer
+			</h1>
+			<p class="text-center text-muted mb-5">
+				Focus on your studies with timed sessions and productivity tracking.
+			</p>
+		</div>
+	</div>
+
+	<!-- Timer Section -->
+	<div class="timer-container" id="timer-container">
+		<h3 id="timer-status">Ready to start studying?</h3>
+		<div class="timer-display" id="timer-display">00:00:00</div>
+		<div class="timer-controls">
+			<button class="btn btn-timer btn-start" id="start-btn">
+				<i class="fas fa-play"></i>
+				Start Session
+			</button>
+			<button
+				class="btn btn-timer btn-pause"
+				id="pause-btn"
+				style="display: none"
+			>
+				<i class="fas fa-pause"></i>
+				Pause
+			</button>
+			<button
+				class="btn btn-timer btn-stop"
+				id="stop-btn"
+				style="display: none"
+			>
+				<i class="fas fa-stop"></i>
+				Stop Session
+			</button>
+		</div>
+	</div>
+
+	<!-- Session Info -->
+	<div class="session-info" id="session-info" style="display: none">
+		<div class="row">
+			<div class="col-md-6">
+				<h5>Current Session</h5>
+				<p>
+					<strong>Subject:</strong> <span id="current-subject">Not set</span>
+				</p>
+				<p><strong>Start Time:</strong> <span id="start-time">-</span></p>
+				<p>
+					<strong>Mood Before:</strong> <span id="mood-before-display">-</span>
+				</p>
+			</div>
+			<div class="col-md-6">
+				<h5>Session Progress</h5>
+				<div class="progress mb-3">
+					<div
+						class="progress-bar"
+						id="session-progress"
+						style="width: 0%"
+					></div>
+				</div>
+				<p><strong>Elapsed:</strong> <span id="elapsed-time">00:00:00</span></p>
+				<p>
+					<strong>Remaining:</strong> <span id="remaining-time">00:00:00</span>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Tabs -->
+	<div class="tabs-container">
+		<ul class="nav nav-tabs" id="studyTabs" role="tablist">
+			<li class="nav-item">
+				<a
+					class="nav-link active"
+					id="stats-tab"
+					data-toggle="tab"
+					href="#stats"
+					role="tab"
+					>Statistics</a
+				>
+			</li>
+			<li class="nav-item">
+				<a
+					class="nav-link"
+					id="insights-tab"
+					data-toggle="tab"
+					href="#insights"
+					role="tab"
+					>Insights</a
+				>
+			</li>
+			<li class="nav-item">
+				<a
+					class="nav-link"
+					id="sessions-tab"
+					data-toggle="tab"
+					href="#sessions"
+					role="tab"
+					>Recent Sessions</a
+				>
+			</li>
+			<li class="nav-item">
+				<a
+					class="nav-link"
+					id="goals-tab"
+					data-toggle="tab"
+					href="#goals"
+					role="tab"
+					>Goals</a
+				>
+			</li>
+		</ul>
+
+		<div class="tab-content">
+			<!-- Statistics Tab -->
+			<div class="tab-pane fade show active" id="stats" role="tabpanel">
+				<div class="stats-grid" id="stats-grid">
+					<!-- Stats will be loaded here -->
+				</div>
+			</div>
+
+			<!-- Insights Tab -->
+			<div class="tab-pane fade" id="insights" role="tabpanel">
+				<div class="insights-container">
+					<h4 class="mb-4">Productivity Insights</h4>
+					<div id="insights-list">
+						<!-- Insights will be loaded here -->
+					</div>
+				</div>
+			</div>
+
+			<!-- Sessions Tab -->
+			<div class="tab-pane fade" id="sessions" role="tabpanel">
+				<div class="session-list" id="sessions-list">
+					<!-- Sessions will be loaded here -->
+				</div>
+			</div>
+
+			<!-- Goals Tab -->
+			<div class="tab-pane fade" id="goals" role="tabpanel">
+				<div id="goals-list">
+					<!-- Goals will be loaded here -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Session Completion Modal -->
+	<div class="modal fade" id="sessionCompleteModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Session Complete!</h5>
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="mood-after">How do you feel now? (1-10)</label>
+						<input
+							type="range"
+							class="form-control"
+							id="mood-after"
+							min="1"
+							max="10"
+							value="5"
+						/>
+						<div class="d-flex justify-content-between mt-1">
+							<small>😢</small>
+							<small>🤗</small>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="productivity-rating">Productivity Rating (1-5)</label>
+						<select class="form-control" id="productivity-rating">
+							<option value="1">1 - Not productive at all</option>
+							<option value="2">2 - Somewhat unproductive</option>
+							<option value="3" selected>3 - Neutral</option>
+							<option value="4">4 - Quite productive</option>
+							<option value="5">5 - Very productive</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="session-notes">Notes (Optional)</label>
+						<textarea
+							class="form-control"
+							id="session-notes"
+							rows="3"
+							placeholder="Any thoughts about this study session?"
+						></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">
+						Skip
+					</button>
+					<button
+						type="button"
+						class="btn btn-primary"
+						id="complete-session-btn"
+					>
+						Complete Session
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Start Session Modal -->
+	<div class="modal fade" id="startSessionModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Start Study Session</h5>
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="session-subject">Subject (Optional)</label>
+						<input
+							type="text"
+							class="form-control"
+							id="session-subject"
+							placeholder="e.g., Mathematics, History, Programming"
+						/>
+					</div>
+					<div class="form-group">
+						<label for="mood-before">How do you feel right now? (1-10)</label>
+						<input
+							type="range"
+							class="form-control"
+							id="mood-before"
+							min="1"
+							max="10"
+							value="5"
+						/>
+						<div class="d-flex justify-content-between mt-1">
+							<small>😢</small>
+							<small>🤗</small>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">
+						Cancel
+					</button>
+					<button type="button" class="btn btn-primary" id="confirm-start-btn">
+						Start Session
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %} {% block scripts %}
+<script>
+	let timerInterval;
+	let startTime;
+	let pausedTime = 0;
+	let isRunning = false;
+	let isPaused = false;
+	let currentSession = null;
+
+	document.addEventListener("DOMContentLoaded", function () {
+		setupEventListeners();
+		loadStats();
+		loadInsights();
+		loadRecentSessions();
+		loadGoals();
+		checkActiveSession();
+	});
+
+	function setupEventListeners() {
+		// Timer controls
+		document
+			.getElementById("start-btn")
+			.addEventListener("click", showStartModal);
+		document
+			.getElementById("pause-btn")
+			.addEventListener("click", pauseSession);
+		document.getElementById("stop-btn").addEventListener("click", stopSession);
+
+		// Modal buttons
+		document
+			.getElementById("confirm-start-btn")
+			.addEventListener("click", startSession);
+		document
+			.getElementById("complete-session-btn")
+			.addEventListener("click", completeSession);
+
+		// Tab changes
+		$('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
+			const target = $(e.target).attr("href");
+			if (target === "#insights") loadInsights();
+			else if (target === "#sessions") loadRecentSessions();
+			else if (target === "#goals") loadGoals();
+		});
+	}
+
+	function showStartModal() {
+		$("#startSessionModal").modal("show");
+	}
+
+	function startSession() {
+		const subject = document.getElementById("session-subject").value;
+		const moodBefore = document.getElementById("mood-before").value;
+
+		const sessionData = {
+			subject: subject,
+			mood_before: parseInt(moodBefore),
+		};
+
+		fetch("/api/study/start", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(sessionData),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.success) {
+					currentSession = data.session;
+					startTime = new Date();
+					isRunning = true;
+					isPaused = false;
+					pausedTime = 0;
+
+					updateTimerDisplay();
+					updateUI();
+					$("#startSessionModal").modal("hide");
+					showNotification("Study session started!", "success");
+				} else {
+					showNotification("Error: " + data.error, "error");
+				}
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+				showNotification("Error starting session", "error");
+			});
+	}
+
+	function pauseSession() {
+		if (isRunning && !isPaused) {
+			isPaused = true;
+			clearInterval(timerInterval);
+			pausedTime = Date.now() - startTime.getTime();
+
+			fetch("/api/study/pause", {
+				method: "POST",
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					if (data.success) {
+						updateUI();
+						showNotification("Session paused", "info");
+					}
+				});
+		} else if (isPaused) {
+			// Resume
+			isPaused = false;
+			startTime = new Date(Date.now() - pausedTime);
+			timerInterval = setInterval(updateTimerDisplay, 1000);
+			updateUI();
+			showNotification("Session resumed", "success");
+		}
+	}
+
+	function stopSession() {
+		if (isRunning) {
+			clearInterval(timerInterval);
+			$("#sessionCompleteModal").modal("show");
+		}
+	}
+
+	function completeSession() {
+		const moodAfter = document.getElementById("mood-after").value;
+		const productivityRating = document.getElementById(
+			"productivity-rating"
+		).value;
+		const notes = document.getElementById("session-notes").value;
+
+		const completionData = {
+			mood_after: parseInt(moodAfter),
+			productivity_rating: parseInt(productivityRating),
+			notes: notes,
+		};
+
+		fetch("/api/study/stop", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(completionData),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.success) {
+					isRunning = false;
+					isPaused = false;
+					currentSession = null;
+					updateUI();
+					$("#sessionCompleteModal").modal("hide");
+					showNotification("Session completed successfully!", "success");
+
+					// Refresh data
+					loadStats();
+					loadInsights();
+					loadRecentSessions();
+					loadGoals();
+				} else {
+					showNotification("Error: " + data.error, "error");
+				}
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+				showNotification("Error completing session", "error");
+			});
+	}
+
+	function updateTimerDisplay() {
+		if (!isRunning || isPaused) return;
+
+		const elapsed = Math.floor((Date.now() - startTime.getTime()) / 1000);
+		const hours = Math.floor(elapsed / 3600);
+		const minutes = Math.floor((elapsed % 3600) / 60);
+		const seconds = elapsed % 60;
+
+		document.getElementById("timer-display").textContent = `${hours
+			.toString()
+			.padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds
+			.toString()
+			.padStart(2, "0")}`;
+
+		// Update session info if available
+		if (currentSession) {
+			document.getElementById("elapsed-time").textContent = `${hours
+				.toString()
+				.padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds
+				.toString()
+				.padStart(2, "0")}`;
+		}
+	}
+
+	function updateUI() {
+		const startBtn = document.getElementById("start-btn");
+		const pauseBtn = document.getElementById("pause-btn");
+		const stopBtn = document.getElementById("stop-btn");
+		const timerStatus = document.getElementById("timer-status");
+		const sessionInfo = document.getElementById("session-info");
+
+		if (isRunning) {
+			startBtn.style.display = "none";
+			pauseBtn.style.display = "inline-block";
+			stopBtn.style.display = "inline-block";
+
+			if (isPaused) {
+				timerStatus.textContent = "Session Paused";
+				pauseBtn.innerHTML = '<i class="fas fa-play"></i> Resume';
+			} else {
+				timerStatus.textContent = "Study Session Active";
+				pauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+			}
+
+			sessionInfo.style.display = "block";
+			updateSessionInfo();
+		} else {
+			startBtn.style.display = "inline-block";
+			pauseBtn.style.display = "none";
+			stopBtn.style.display = "none";
+			timerStatus.textContent = "Ready to start studying?";
+			sessionInfo.style.display = "none";
+			document.getElementById("timer-display").textContent = "00:00:00";
+		}
+	}
+
+	function updateSessionInfo() {
+		if (currentSession) {
+			document.getElementById("current-subject").textContent =
+				currentSession.subject || "Not set";
+			document.getElementById("start-time").textContent = new Date(
+				currentSession.start_time
+			).toLocaleTimeString();
+
+			const moodBefore = currentSession.mood_before;
+			if (moodBefore) {
+				document.getElementById(
+					"mood-before-display"
+				).innerHTML = `<span class="mood-indicator mood-${moodBefore}"></span>${moodBefore}/10`;
+			} else {
+				document.getElementById("mood-before-display").textContent = "Not set";
+			}
+		}
+	}
+
+	function checkActiveSession() {
+		fetch("/api/study/status")
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.status.active) {
+					// Resume active session
+					currentSession = { id: data.status.session_id };
+					startTime = new Date(data.status.start_time);
+					isRunning = true;
+					timerInterval = setInterval(updateTimerDisplay, 1000);
+					updateUI();
+				}
+			})
+			.catch((error) => console.error("Error checking active session:", error));
+	}
+
+	function loadStats() {
+		fetch("/api/study/stats")
+			.then((response) => response.json())
+			.then((data) => {
+				const stats = data.stats;
+				const statsGrid = document.getElementById("stats-grid");
+
+				statsGrid.innerHTML = `
+            <div class="stat-card">
+                <div class="stat-value">${stats.total_sessions}</div>
+                <div class="stat-label">Total Sessions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">${stats.total_time_formatted}</div>
+                <div class="stat-label">Total Study Time</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">${stats.current_streak}</div>
+                <div class="stat-label">Current Streak</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">${stats.average_productivity}</div>
+                <div class="stat-label">Avg Productivity</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">${stats.average_session_formatted}</div>
+                <div class="stat-label">Avg Session Length</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">${stats.mood_improvements}/${stats.mood_entries_count}</div>
+                <div class="stat-label">Mood Improvements</div>
+            </div>
+        `;
+			})
+			.catch((error) => console.error("Error loading stats:", error));
+	}
+
+	function loadInsights() {
+		fetch("/api/study/insights")
+			.then((response) => response.json())
+			.then((data) => {
+				const insightsList = document.getElementById("insights-list");
+
+				if (data.insights.length === 0) {
+					insightsList.innerHTML =
+						'<p class="text-muted">Complete more study sessions to see insights!</p>';
+					return;
+				}
+
+				insightsList.innerHTML = data.insights
+					.map(
+						(insight) => `
+            <div class="insight-item ${insight.type}">
+                <i class="${insight.icon} insight-icon"></i>
+                <div>
+                    <strong>${insight.message}</strong>
+                </div>
+            </div>
+        `
+					)
+					.join("");
+			})
+			.catch((error) => console.error("Error loading insights:", error));
+	}
+
+	function loadRecentSessions() {
+		fetch("/api/study/sessions")
+			.then((response) => response.json())
+			.then((data) => {
+				const sessionsList = document.getElementById("sessions-list");
+
+				if (data.sessions.length === 0) {
+					sessionsList.innerHTML =
+						'<p class="text-muted">No study sessions yet. Start your first session!</p>';
+					return;
+				}
+
+				sessionsList.innerHTML = data.sessions
+					.map((session) => {
+						const productivityClass = session.productivity_rating
+							? `rating-${session.productivity_rating}`
+							: "";
+						const moodBefore = session.mood_before
+							? `<span class="mood-indicator mood-${session.mood_before}"></span>${session.mood_before}`
+							: "N/A";
+						const moodAfter = session.mood_after
+							? `<span class="mood-indicator mood-${session.mood_after}"></span>${session.mood_after}`
+							: "N/A";
+
+						return `
+                <div class="session-item ${
+									session.completed ? "completed" : "paused"
+								}">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="mb-1">${
+															session.subject || "General Study"
+														}</h6>
+                            <small class="text-muted">${new Date(
+															session.start_time
+														).toLocaleDateString()}</small>
+                        </div>
+                        <div class="text-right">
+                            <div class="mb-1">${
+															session.duration_formatted
+														}</div>
+                            ${
+															session.productivity_rating
+																? `<span class="productivity-rating ${productivityClass}">${session.productivity_rating}/5</span>`
+																: ""
+														}
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <small>Mood: ${moodBefore} → ${moodAfter}</small>
+                        </div>
+                        <div class="col-6 text-right">
+                            <small>${new Date(
+															session.start_time
+														).toLocaleTimeString()} - ${new Date(
+							session.end_time
+						).toLocaleTimeString()}</small>
+                        </div>
+                    </div>
+                    ${
+											session.notes
+												? `<div class="mt-2"><small><em>${session.notes}</em></small></div>`
+												: ""
+										}
+                </div>
+            `;
+					})
+					.join("");
+			})
+			.catch((error) => console.error("Error loading sessions:", error));
+	}
+
+	function loadGoals() {
+		fetch("/api/study/goals")
+			.then((response) => response.json())
+			.then((data) => {
+				const goalsList = document.getElementById("goals-list");
+
+				if (data.goals.length === 0) {
+					goalsList.innerHTML =
+						'<p class="text-muted">No goals available yet. Complete more sessions to see personalized goals!</p>';
+					return;
+				}
+
+				goalsList.innerHTML = data.goals
+					.map((goal) => {
+						const progress = Math.min(100, (goal.current / goal.target) * 100);
+						return `
+                <div class="goal-item">
+                    <h6>${goal.description}</h6>
+                    <div class="goal-progress">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: ${progress}%"></div>
+                        </div>
+                        <small class="text-muted">${goal.current} / ${goal.target} ${goal.unit}</small>
+                    </div>
+                </div>
+            `;
+					})
+					.join("");
+			})
+			.catch((error) => console.error("Error loading goals:", error));
+	}
+
+	function showNotification(message, type) {
+		const notification = document.createElement("div");
+		notification.className = `alert alert-${
+			type === "success" ? "success" : type === "error" ? "danger" : "info"
+		} alert-dismissible fade show`;
+		notification.innerHTML = `
+        ${message}
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    `;
+
+		document
+			.querySelector(".container-fluid")
+			.insertBefore(
+				notification,
+				document.querySelector(".container-fluid").firstChild
+			);
+
+		setTimeout(() => {
+			$(notification).alert("close");
+		}, 3000);
+	}
+</script>
+{% endblock %}

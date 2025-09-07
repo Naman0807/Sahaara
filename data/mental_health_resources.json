@@ -1,0 +1,53 @@
+{
+	"class_10_12": {
+		"breathing_exercises": {
+			"title": "4-7-8 Breathing",
+			"description": "Inhale for 4 seconds, hold for 7, exhale for 8. Repeat 4 times.",
+			"tips": ["Do this before exams", "Helps reduce anxiety"]
+		},
+		"sleep_hygiene": {
+			"title": "Better Sleep Habits",
+			"description": "Avoid screens 1 hour before bed, keep room cool and dark.",
+			"tips": ["Consistent bedtime", "No caffeine after 2 PM"]
+		},
+		"exam_stress": {
+			"title": "Managing Exam Pressure",
+			"description": "Break study sessions into 25-minute Pomodoro intervals.",
+			"tips": ["Take short breaks", "Talk to parents about concerns"]
+		}
+	},
+	"college_youth": {
+		"anxiety_management": {
+			"title": "Grounding Techniques",
+			"description": "Name 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, 1 you can taste.",
+			"tips": ["Use during panic attacks", "Practice daily"]
+		},
+		"relationship_advice": {
+			"title": "Healthy Communication",
+			"description": "Use 'I' statements: 'I feel worried when...' instead of 'You always...'.",
+			"tips": ["Listen actively", "Set boundaries"]
+		},
+		"financial_stress": {
+			"title": "Budgeting Basics",
+			"description": "Track expenses for a week, categorize into needs/wants.",
+			"tips": ["Start small savings", "Seek part-time work if needed"]
+		}
+	},
+	"first_jobbers": {
+		"burnout_prevention": {
+			"title": "Work-Life Balance",
+			"description": "Set work hours, take lunch breaks away from desk, end work at set time.",
+			"tips": ["Schedule personal time", "Learn to say no"]
+		},
+		"imposter_syndrome": {
+			"title": "Building Confidence",
+			"description": "Keep a 'wins' journal, acknowledge achievements daily.",
+			"tips": ["Talk to mentors", "Focus on growth, not perfection"]
+		},
+		"boundary_setting": {
+			"title": "Setting Professional Boundaries",
+			"description": "Politely decline extra work when overloaded, communicate availability clearly.",
+			"tips": ["Use email for work after hours", "Take all vacation days"]
+		}
+	}
+}
